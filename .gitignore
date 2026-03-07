@@ -1,0 +1,3 @@
+*.o
+*.elf
+tools/micronucleus/micronucleus
