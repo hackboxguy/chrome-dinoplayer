@@ -1,5 +1,9 @@
 # Chrome Dino Auto-Player
 
+![Chrome Dino Auto-Player in action](images/chrome-dino-player.gif)
+
+![DigiSpark ATtiny85 with two LM393 LDR sensor boards](images/dinoplayer-hw.jpg)
+
 A tiny USB dongle that plays the Chrome dinosaur game automatically. It plugs
 into any PC, appears as a standard USB keyboard, detects obstacles on the
 monitor using light sensors, and sends jump/duck keystrokes with
