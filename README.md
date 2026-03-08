@@ -190,6 +190,8 @@ jump_delay = clamp(rolling_min * scale_factor, MIN_DELAY, MAX_DELAY)
 
 ### Wiring
 
+![ATtiny-85 based Chrome Dino player wiring setup](images/dino-player-wiring-setup.png)
+
 ```
 Lower LM393 Board       DigiSpark
   VCC  ────────────────  5V
