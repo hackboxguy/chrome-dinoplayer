@@ -313,7 +313,10 @@ int main(void) {
             uint8_t lower = readLower();
             if (inEnvelope) {
                 if (lower) {
-                    // Sensor clear — obstacle still passing or gap within it?
+                    // Still triggered (or re-triggered within gap)
+                    gapTimer = 0;
+                } else {
+                    // Sensor clear — obstacle may be over unless it re-triggers soon
                     gapTimer++;
                     if (gapTimer > GAP_THRESHOLD_MS) {
                         // Envelope ended
@@ -321,11 +324,8 @@ int main(void) {
                         recordEnvelope(width);
                         inEnvelope = 0;
                     }
-                } else {
-                    // Still triggered (or re-triggered within gap)
-                    gapTimer = 0;
                 }
-            } else if (!lower) {
+            } else if (lower) {
                 // New envelope starting during cooldown
                 envelopeStart = msTick;
                 inEnvelope = 1;
@@ -353,10 +353,10 @@ int main(void) {
                     inEnvelope = 0;
                 }
             }
-        } else if (!lower && lower == 0) {
+        } else if (lower) {
             // Lower sensor just triggered — start new envelope
             // (only when not already in envelope)
-            if (readLower() == 0) {  // double-check (noise rejection)
+            if (readLower()) {  // double-check (noise rejection)
                 envelopeStart = msTick;
                 inEnvelope = 1;
                 gapTimer = 0;
